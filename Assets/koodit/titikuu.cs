@@ -9,9 +9,12 @@ public class Titikuu : MonoBehaviour
     public float jumpHeight;
     private KeyCode lastHitKey;
     // Start is called before the first frame update
+    Animation anim;
+    bool tippui = true;
     void Start()
     {
-        
+        anim = GetComponent<Animation>(); 
+     
     }
 
     // Tämä koodin osa eli funktio suoritetaan useita kertoja sekunnissa
@@ -20,7 +23,10 @@ public class Titikuu : MonoBehaviour
     {
        if(Input.GetKeyDown (KeyCode.Space))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
+            if(tippui) {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, jumpHeight);
+                tippui = false;
+            }
         }
 
         if(Input.GetKeyDown (KeyCode.W))
@@ -28,30 +34,36 @@ public class Titikuu : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(transform.up * 0.007f);
         }
 
-        if(Input.GetKeyDown (KeyCode.D))
+        if(Input.GetKey (KeyCode.D))
         {
-            if(lastHitKey == KeyCode.D)
+         /*   if(lastHitKey == KeyCode.D)
             {
 
             }else
-            {
+            {*/
                 GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+               // anim.Play();
                 lastHitKey = KeyCode.D;
-            }
+            //}
         }
 
 
-        if(Input.GetKeyDown (KeyCode.A))
+        if(Input.GetKey (KeyCode.A))
         {
-            if(lastHitKey == KeyCode.A)
+           /* if(lastHitKey == KeyCode.A)
             {
 
-            }else
-            {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(moveSpeed, 0);
+            }else*/
+         //   {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(-moveSpeed, 0);
+               // anim.Play();
                 lastHitKey = KeyCode.A;
-            }
+           // }
         }
-    }        
+    }
+
+    public void OnCollisionEnter2D(Collision2D other) {
+        tippui=true;
+    }       
     }
 

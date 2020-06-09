@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class movement : MonoBehaviour
+public class Raketti : MonoBehaviour
 {
 
         public float moveSpeed;
@@ -25,19 +25,23 @@ public class movement : MonoBehaviour
 
         if(Input.GetKeyDown (KeyCode.W))
         {
-            GetComponent<Rigidbody2D>().AddForce(transform.up * 0.0008f);
+            GetComponent<Rigidbody2D>().AddForce(transform.up * 0.009f);
         }
 
         if(Input.GetKeyDown (KeyCode.D))
         {
-            GetComponent<Rigidbody2D>().AddTorque(-0.0002f, ForceMode2D.Force); 
+            GetComponent<Rigidbody2D>().AddTorque(-0.001f, ForceMode2D.Force); 
         }
 
 
         if(Input.GetKeyDown (KeyCode.A))
         {
-            GetComponent<Rigidbody2D>().AddTorque(0.0002f, ForceMode2D.Force);
+            GetComponent<Rigidbody2D>().AddTorque(0.001f, ForceMode2D.Force);
         }
-    }        
+    }
+        public void OnCollisionEnter2D(Collision2D kolari) {
+          //  UnityEngine.SceneManagement.GetComponent<SceneManager>().LoadScene("testiplaneetta", LoadSceneMode.Additive);
+          Application.LoadLevel("testiplaneetta");
+        }        
     }
 
